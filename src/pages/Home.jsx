@@ -2,10 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div
       style={{
-        padding: "50px 40px 30px 40px",
+        padding: isMobile ? "30px 20px 20px 20px" : "50px 40px 30px 40px",
         maxWidth: "1200px",
         margin: "0 auto",
         textAlign: "left",
@@ -15,8 +25,8 @@ const Home = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1.5fr 1fr",
-            gap: "40px",
+            gridTemplateColumns: isMobile ? "1fr" : "1.5fr 1fr",
+            gap: isMobile ? "30px" : "40px",
             alignItems: "start",
           }}
         >
@@ -24,7 +34,7 @@ const Home = () => {
             <h1
               style={{
                 marginBottom: "0",
-                fontSize: "46px",
+                fontSize: isMobile ? "36px" : "46px",
                 fontWeight: "700",
                 display: "block",
                 lineHeight: "1.2",
@@ -55,7 +65,7 @@ const Home = () => {
               style={{
                 marginTop: "0",
                 lineHeight: "1.8",
-                fontSize: "16px",
+                fontSize: isMobile ? "14px" : "16px",
                 maxWidth: "600px",
                 color: "var(--text)",
               }}
@@ -108,7 +118,7 @@ const Home = () => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
                 gap: "16px",
               }}
             >
@@ -300,8 +310,8 @@ const Home = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1.4fr",
-          gap: "60px",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1.4fr",
+          gap: isMobile ? "40px" : "60px",
           marginTop: "20px",
         }}
       >
@@ -363,7 +373,7 @@ const Home = () => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
               gap: "16px 20px",
             }}
           >

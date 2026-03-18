@@ -2,6 +2,16 @@ import React from "react";
 import { Github, ExternalLink, Layers, Code, User } from "lucide-react";
 
 const Projects = () => {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const projects = [
     {
       title: "Web Component - Table",
@@ -59,7 +69,7 @@ const Projects = () => {
   return (
     <div
       style={{
-        padding: "40px",
+        padding: isMobile ? "30px 20px" : "40px",
         maxWidth: "1126px",
         margin: "0 auto",
         textAlign: "left",
@@ -67,7 +77,7 @@ const Projects = () => {
     >
       <h2
         style={{
-          fontSize: "32px",
+          fontSize: isMobile ? "24px" : "32px",
           fontWeight: "bold",
           marginBottom: "16px",
           color: "var(--text-h)",
@@ -90,7 +100,9 @@ const Projects = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : "repeat(auto-fit, minmax(320px, 1fr))",
           gap: "32px",
         }}
       >
